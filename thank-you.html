@@ -1,0 +1,90 @@
+﻿﻿<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Díky!</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="assets/css/base.css?v=1" />
+  <link rel="stylesheet" href="assets/css/components.css?v=3" />
+  <link rel="stylesheet" href="assets/css/sections.css?v=3" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-orb bg-orb--one" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb--two" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb--three" aria-hidden="true"></div>
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#main">Přeskočit na obsah</a>
+
+  <header class="site-header glass glass--thin glass--static">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="KSN Bendl – domů">
+        <img class="brand-logo" src="assets/media/img/logo.png" alt="KSN Bendl" width="432" height="317" decoding="async" />
+        <div class="brand-text">
+          <span class="brand-name">KSN Bendl</span>
+          <span class="brand-tagline">Krása střídá nádheru</span>
+        </div>
+      </a>
+
+      <nav class="site-nav" id="siteNav" aria-label="Hlavní navigace">
+        <a href="/#hero">Domů</a>
+        <a href="/#about">O mně</a>
+        <a href="/#gallery">Galerie</a>
+        <a href="/#music">Beaty</a>
+        <a href="/#videos">Video</a>
+        <a href="/#events">Akce</a>
+        <a href="/#comments">Komentáře</a>
+        <a href="/#contact">Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn--accent btn--small" href="/#contact">Booking</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="siteNav">
+          <span class="menu-toggle__label">Menu</span>
+          <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="section thank-you">
+    <div class="container">
+      <div class="thank-you-card glass is-interactive">
+        <p class="eyebrow">Hotovo</p>
+        <h1>Díky za zprávu!</h1>
+        <p class="muted">Ozvu se co nejdřív.</p>
+        <div class="thank-you-actions">
+          <a class="btn btn--accent" href="/">Zpět na web</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 KSN Bendl — Krása střídá nádheru</p>
+      <a href="/privacy-policy.html">Zásady soukromí</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var script = document.createElement('script');
+      if (location.protocol === 'file:') {
+        script.src = 'assets/js/bundle.js';
+      } else {
+        script.type = 'module';
+        script.src = 'assets/js/main.js';
+      }
+      document.body.appendChild(script);
+    })();
+  </script>
+</body>
+</html>
+
+

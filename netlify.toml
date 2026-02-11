@@ -1,0 +1,13 @@
+﻿[build]
+publish = "."
+command = ""
+
+[[redirects]]
+from = "/privacy.html"
+to = "/privacy-policy.html"
+status = 301
+
+[[redirects]]
+from = "/dik.html"
+to = "/thank-you.html"
+status = 301
