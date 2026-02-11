@@ -11,3 +11,4 @@
   from = "/dik.html"
   to = "/thank-you.html"
   status = 301
+Add-Content -Path .\netlify.toml -Value "`n# touch"
