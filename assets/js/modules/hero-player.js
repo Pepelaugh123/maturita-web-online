@@ -16,6 +16,25 @@ export const initHeroPlayer = () => {
 
   if (!audio || !playBtn || !playIcon || !playLabel || !current || !duration || !seek || !volume) return;
 
+  const getSafeDuration = () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) return audio.duration;
+
+    if (audio.seekable && audio.seekable.length > 0) {
+      const end = audio.seekable.end(audio.seekable.length - 1);
+      if (Number.isFinite(end) && end > 0) return end;
+    }
+
+    return 0;
+  };
+
+  const syncDuration = () => {
+    const total = getSafeDuration();
+    if (total > 0) {
+      duration.textContent = formatTime(total);
+      seek.disabled = false;
+    }
+  };
+
   const setPlaying = (isPlaying) => {
     playBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
     playIcon.textContent = isPlaying ? '❚❚' : '▶';
@@ -33,15 +52,18 @@ export const initHeroPlayer = () => {
   audio.setAttribute('playsinline', 'true');
   audio.setAttribute('webkit-playsinline', 'true');
 
-  audio.addEventListener('loadedmetadata', () => {
-    duration.textContent = formatTime(audio.duration);
-    seek.disabled = false;
+  ['loadedmetadata', 'loadeddata', 'durationchange', 'canplay', 'canplaythrough'].forEach((eventName) => {
+    audio.addEventListener(eventName, syncDuration);
   });
 
   audio.addEventListener('timeupdate', () => {
+    const total = getSafeDuration();
     current.textContent = formatTime(audio.currentTime);
-    if (audio.duration) {
-      seek.value = ((audio.currentTime / audio.duration) * 100).toFixed(2);
+
+    if (total > 0) {
+      duration.textContent = formatTime(total);
+      seek.disabled = false;
+      seek.value = ((audio.currentTime / total) * 100).toFixed(2);
     }
   });
 
@@ -49,14 +71,19 @@ export const initHeroPlayer = () => {
     setPlaying(true);
     pauseAllMedia(audio);
   });
+
   audio.addEventListener('pause', () => setPlaying(false));
   audio.addEventListener('ended', () => setPlaying(false));
   audio.addEventListener('error', () => setError('Soubor nejde přehrát.'));
 
-  seek.addEventListener('input', () => {
-    if (!audio.duration) return;
-    audio.currentTime = (seek.value / 100) * audio.duration;
-  });
+  const seekToPosition = () => {
+    const total = getSafeDuration();
+    if (!total) return;
+    audio.currentTime = (parseFloat(seek.value) / 100) * total;
+  };
+
+  seek.addEventListener('input', seekToPosition);
+  seek.addEventListener('change', seekToPosition);
 
   volume.addEventListener('input', () => {
     audio.volume = parseFloat(volume.value);
@@ -87,4 +114,10 @@ export const initHeroPlayer = () => {
 
   audio.volume = parseFloat(volume.value || '0.8');
   setPlaying(false);
+
+  if (audio.readyState >= 1) {
+    syncDuration();
+  } else {
+    audio.load();
+  }
 };
