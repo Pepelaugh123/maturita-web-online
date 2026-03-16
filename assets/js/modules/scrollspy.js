@@ -12,11 +12,23 @@ export const initScrollSpy = () => {
   });
 
   const setActive = (id) => {
-    const active = linkById.get(id);
-    if (!active) return;
-    links.forEach((link) => link.classList.remove('is-active'));
-    active.classList.add('is-active');
+    links.forEach((link) => {
+      const isActive = link.getAttribute('href') === `#${id}`;
+      link.classList.toggle('is-active', isActive);
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
   };
+
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      const id = link.getAttribute('href').replace('#', '');
+      if (id) setActive(id);
+    });
+  });
 
   if (!('IntersectionObserver' in window)) {
     setActive(sections[0].id);
@@ -25,14 +37,21 @@ export const initScrollSpy = () => {
 
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+      if (visible.length) {
+        setActive(visible[0].target.id);
+      }
     },
-    { rootMargin: '-45% 0px -45% 0px', threshold: 0.1 }
+    {
+      rootMargin: '-20% 0px -55% 0px',
+      threshold: [0.15, 0.35, 0.55, 0.75]
+    }
   );
 
   sections.forEach((section) => observer.observe(section));
+
+  setActive(sections[0].id);
 };

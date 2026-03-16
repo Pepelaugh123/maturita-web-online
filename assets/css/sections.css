@@ -230,13 +230,23 @@
 }
 
 .track-card__play {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.08);
   font-weight: 700;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  font-size: 1.05rem;
+  text-align: center;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
 }
 
 .track-card__play:disabled {
@@ -459,5 +469,24 @@
 @media (max-width: 720px) {
   .brand-tagline {
     display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .track-card__row {
+    grid-template-columns: 56px 1fr;
+    align-items: center;
+  }
+
+  .track-card__play {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    font-size: 1rem;
+  }
+
+  .track-card__time {
+    grid-column: 2;
+    justify-self: end;
   }
 }
