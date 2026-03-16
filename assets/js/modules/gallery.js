@@ -25,7 +25,7 @@ export const initGallery = () => {
 
     dialog.innerHTML = `
       <div class="media-modal__content">
-        <button class="media-modal__close" type="button" aria-label="Zavrit">&times;</button>
+        <button class="media-modal__close" type="button" aria-label="Zavrit"></button>
         <div class="media-modal__title"></div>
         <div class="media-modal__viewer">
           <img alt="" />

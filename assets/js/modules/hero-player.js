@@ -85,9 +85,13 @@ export const initHeroPlayer = () => {
   seek.addEventListener('input', seekToPosition);
   seek.addEventListener('change', seekToPosition);
 
-  volume.addEventListener('input', () => {
+ volume.addEventListener('input', () => {
+  try {
     audio.volume = parseFloat(volume.value);
-  });
+  } catch (err) {
+    console.debug('Volume control not supported on this device:', err);
+  }
+});
 
   playBtn.addEventListener('click', async () => {
     try {

@@ -406,11 +406,12 @@ body.nav-open {
   width: 100%;
   appearance: none;
   -webkit-appearance: none;
-  height: 18px;
+  height: 32px;
   background: transparent;
   cursor: pointer;
-  padding: 0;
+  padding: 8px 0;
   margin: 0;
+  touch-action: pan-x;
 }
 
 .range input[type="range"]:focus-visible {
@@ -420,7 +421,7 @@ body.nav-open {
 }
 
 .range input[type="range"]::-webkit-slider-runnable-track {
-  height: 6px;
+  height: 8px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -428,25 +429,25 @@ body.nav-open {
 
 .range input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   border: 2px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
-  margin-top: -6px;
+  margin-top: -9px;
 }
 
 .range input[type="range"]::-moz-range-track {
-  height: 6px;
+  height: 8px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .range input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   border: 2px solid rgba(0, 0, 0, 0.2);
@@ -576,14 +577,34 @@ body.nav-open {
   top: 12px;
   background: rgba(10, 12, 18, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--text);
-  font-size: 24px;
+  font-size: 28px;
+  line-height: 1;
+  padding: 0;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+
+.media-modal__close::before {
+  content: '×';
+  display: block;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.media-modal__close::before {
+  content: '×';
+  display: block;
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 .media-modal__close:hover {
@@ -717,4 +738,10 @@ body.nav-open {
   left: 18px;
   right: 18px;
   bottom: 8px;
+}
+
+@media (max-width: 720px) {
+  .range--volume {
+    display: none;
+  }
 }
